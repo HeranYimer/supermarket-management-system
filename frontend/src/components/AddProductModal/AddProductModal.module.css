@@ -1,0 +1,20 @@
+.buttons{
+    display: flex;
+}
+.createBtn{
+background-color: rgb(47, 158, 237);
+margin-right: 10px;
+width: 150px;
+}
+.createBtn:hover{
+background-color: rgb(7, 121, 202);
+
+}
+.cancelBtn{
+ background-color: #e14e50; 
+ margin-left: 10px;
+ width: 150px;
+}
+.cancelBtn:hover{
+ background-color: #bb2d2f; 
+}

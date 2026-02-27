@@ -1,0 +1,8 @@
+.primaryBtn{
+   background-color: #2b9d2f;
+    width: 150px;
+    margin-top: 10px;
+}
+.primaryBtn:hover{
+    background-color: #048623;
+}

@@ -1,0 +1,37 @@
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.card {
+  background: linear-gradient(135deg, #ffffff, #f1f5f9);
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.top span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.card h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 15px 0;
+  color: #0f172a;
+}
+
+.growth {
+  font-size: 13px;
+  color: #16a34a;
+  font-weight: 500;
+}
