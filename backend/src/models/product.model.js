@@ -1,5 +1,5 @@
 import pool from "../config/database.js";
-
+import * as NotificationModel from "./notification.model.js";
 export const getAllProducts = async (status = "all") => {
   let query = `
     SELECT p.*, c.name AS category_name
@@ -73,7 +73,31 @@ export const updateProduct = async (id, product) => {
     WHERE id = ?
     `,
     [name, description, price, stock_quantity, category_id, image_url, is_active, id]
+    
   );
+if (stock_quantity < 10 && stock_quantity > 5 ) {
+  const roles = ["ADMIN", "MANAGER", "INVENTORY"];
+  for (let role of roles) {
+    await NotificationModel.createNotification(
+      "Low Stock Alert",
+      `${name} stock is low (${stock_quantity})`,
+      "LOW_STOCK",
+      role
+    );
+  }
+}
+
+if (stock_quantity < 5) {
+  const roles = ["ADMIN", "MANAGER", "INVENTORY"];
+  for (let role of roles) {
+    await NotificationModel.createNotification(
+      "Critical Stock Alert",
+      `${name} stock is critically low (${stock_quantity})`,
+      "CRITICAL",
+      role
+    );
+  }
+}
 };
 
 export const softDeleteProduct = async (id) => {
