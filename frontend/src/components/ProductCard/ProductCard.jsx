@@ -17,7 +17,9 @@ export default function ProductCard({
   const [showConfirm, setShowConfirm] = useState(null);
   const [showEdit, setShowEdit] = useState(false);
 
-  const isLowStock = product.stock_quantity < 10;
+  const LOW_STOCK_THRESHOLD = 10;
+  const isCritical = product.stock_quantity <= 5;
+const isLowStock = Number(product.stock_quantity || 0) <= LOW_STOCK_THRESHOLD;
 
   return (
     <>
@@ -45,9 +47,19 @@ export default function ProductCard({
           {Number(product.price).toLocaleString("en-ET")} ETB
         </div>
 
-        <div className={`${styles.stock} ${isLowStock ? styles.lowStock : ""}`}>
-          Stock: {product.stock_quantity}
-        </div>
+       <div className={styles.stock}>
+  Stock: {product.stock_quantity}
+
+  {isLowStock && (
+  <span
+    className={`${styles.lowStockBadge} ${
+      isCritical ? styles.critical : ""
+    }`}
+  >
+    {isCritical ? "🚨 Critical" : "⚠ Low Stock"}
+  </span>
+)}
+</div>
 
         {canEdit && (
           <div className={styles.actions}>
