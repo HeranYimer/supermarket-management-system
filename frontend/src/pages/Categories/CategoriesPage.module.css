@@ -1,0 +1,130 @@
+.container {
+  padding: 20px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  padding: 8px;
+  flex: 1;
+  width: 280px;
+}
+.addBtn{
+background-color: #2b9d2f;
+width: 150px;
+}
+.addBtn:hover{
+    background-color: #048623;
+}
+.editBtn{
+    background-color: #97cff4;
+}
+.editBtn:hover{
+    background-color: #2980b9;
+}
+.addBtn,
+.createBtn,
+.cancelBtn,
+.editBtn,
+.deleteBtn,
+.updateBtn {
+  padding: 6px 12px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.updateBtn,.createBtn{
+background-color:  rgb(38, 144, 210);
+width: 150px;
+}
+.cancelBtn{
+    background-color:#f64c4c;
+    width: 150px;
+}
+.cancelBtn:hover {
+  background-color: #c43636;
+}
+
+.deleteBtn {
+  background-color: #f74444;
+}
+.deleteBtn:hover{
+    background-color: #d72b2b;
+}
+
+.categoryList {
+  list-style: none;
+  padding: 0;
+}
+
+.categoryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #ccc;
+  gap: 10px;
+}
+
+.itemBtns {
+  display: flex;
+  gap: 5px;
+}
+
+.addFormBlock {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  width: 700px;
+}
+
+.formBtns {
+  display: flex;
+  gap: 5px;
+  padding: 0px 0px 10px 0px;
+}
+@media (max-width: 768px) {
+  .categoryItem {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .itemBtns {
+    margin-top: 5px;
+  }
+
+  .addFormBlock {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .formBtns {
+    width: 100%;
+    display: flex;
+  }
+
+
+  .searchInput {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .categoryItem {
+    gap: 5px;
+  }
+
+  .formBtns {
+    flex-direction: column;
+  }
+
+  .addFormBlock {
+    width: 100%;
+  }
+}

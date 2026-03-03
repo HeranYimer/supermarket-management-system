@@ -185,6 +185,69 @@ export const restoreProduct = async (id, token) => {
   return res.json();
 };
 
+// ================= CATEGORY API =================
+
+// Get all categories
+export const getCategories = async (token) => {
+  const res = await fetch("http://localhost:5000/api/categories", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch categories");
+  return res.json();
+};
+
+// Create category
+export const createCategory = async (name, token) => {
+  const res = await fetch("http://localhost:5000/api/categories", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name }), // wrap string as object
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Failed to create category");
+  return data;
+};
+
+// Update category
+export const updateCategory = async (id, name, token) => {
+  const res = await fetch(`http://localhost:5000/api/categories/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name }),
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || "Failed to update category");
+  }
+  return data;
+};
+
+// Delete category
+export const deleteCategory = async (id, token) => {
+  const res = await fetch(
+    `http://localhost:5000/api/categories/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (!res.ok) throw new Error("Failed to delete category");
+  return res.json();
+};
 /* =====================================================
    SALES (Future)
 ===================================================== */

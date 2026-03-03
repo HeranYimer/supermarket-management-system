@@ -2,32 +2,40 @@ import pool from "../config/database.js";
 import * as NotificationModel from "./notification.model.js";
 export const getAllProducts = async (status = "all") => {
   let query = `
-    SELECT p.*, c.name AS category_name
+    SELECT 
+      p.*,
+      c.name AS category_name
     FROM products p
-    LEFT JOIN categories c ON p.category_id = c.id
+    LEFT JOIN categories c
+      ON p.category_id = c.id
   `;
-
-  const params = [];
 
   if (status === "active") {
     query += " WHERE p.is_active = TRUE";
-  }
-
-  if (status === "inactive") {
+  } else if (status === "inactive") {
     query += " WHERE p.is_active = FALSE";
   }
 
   query += " ORDER BY p.created_at DESC";
 
-  const [rows] = await pool.query(query, params);
+  const [rows] = await pool.query(query);
   return rows;
 };
 
 export const getProductById = async (id) => {
   const [rows] = await pool.query(
-    `SELECT * FROM products WHERE id = ?`,
+    `
+    SELECT 
+      p.*,
+      c.name AS category_name
+    FROM products p
+    LEFT JOIN categories c
+      ON p.category_id = c.id
+    WHERE p.id = ?
+    `,
     [id]
   );
+
   return rows[0];
 };
 export const getInactiveProducts = async () => {

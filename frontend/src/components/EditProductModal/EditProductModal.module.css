@@ -34,6 +34,9 @@
   background-color: rgb(38, 144, 210);
 margin:0 10px;
 }
+.updateBtn:hover{
+  background-color: #fff;
+}
 .cancleBtn{
   background: #f64c4c;
   margin:0 10px;

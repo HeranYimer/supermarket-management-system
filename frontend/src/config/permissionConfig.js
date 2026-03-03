@@ -20,3 +20,20 @@ export const productPermissions = {
     canDeactivate: true,
   },
 };
+export const categoryPermissions = {
+  admin: {
+    canAdd: true,
+    canDelete: true,
+    canEdit: true,
+  },
+  manager: {
+    canAdd: true,
+    canDelete: false,
+    canEdit: true,
+  },
+  inventory: {
+    canAdd: false,
+    canDelete: false,
+    canEdit: false,
+  },
+};

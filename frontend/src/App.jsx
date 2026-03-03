@@ -8,6 +8,7 @@ import AdminDashboard from "./pages/Dashboard/Admin/AdminDashboard.jsx";
 import EmployeesPage from "./pages/Dashboard/Admin/EmployeesPage.jsx";
 import ProductsPage from "./pages/Products/ProductsPage.jsx";
 import NotificationsPage from "./pages/Notifications/NotificationsPage.jsx";
+import CategoriesPage from "./pages/Categories/CategoriesPage.jsx";
 import ManagerDashboard from "./pages/Dashboard/Manager/ManagerDashboard.jsx";
 import CashierDashboard from "./pages/Dashboard/Cashier/CashierDashboard.jsx";
 import InventoryDashboard from "./pages/Dashboard/Inventory/InventoryDashboard.jsx";
@@ -77,6 +78,14 @@ function App() {
   element={
     <ProtectedRoute user={user} allowedRoles={["ADMIN", "MANAGER", "INVENTORY"]}>
       <NotificationsPage user={user} token={user?.token} />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/categories"
+  element={
+    <ProtectedRoute user={user} allowedRoles={["ADMIN", "MANAGER", "INVENTORY"]}>
+      <CategoriesPage token={user?.token} user={user} />
     </ProtectedRoute>
   }
 />
