@@ -1,5 +1,5 @@
 // frontend/src/App.jsx
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom"; 
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Login from "./pages/Login/Login.jsx";
@@ -9,6 +9,8 @@ import EmployeesPage from "./pages/Dashboard/Admin/EmployeesPage.jsx";
 import ProductsPage from "./pages/Products/ProductsPage.jsx";
 import NotificationsPage from "./pages/Notifications/NotificationsPage.jsx";
 import CategoriesPage from "./pages/Categories/CategoriesPage.jsx";
+import SuppliersPage from "./pages/Suppliers/SuppliersPage.jsx";
+import PurchaseOrdersPage from "./pages/PurchaseOrders/PurchaseOrdersPage.jsx"; // <-- new import
 import ManagerDashboard from "./pages/Dashboard/Manager/ManagerDashboard.jsx";
 import CashierDashboard from "./pages/Dashboard/Cashier/CashierDashboard.jsx";
 import InventoryDashboard from "./pages/Dashboard/Inventory/InventoryDashboard.jsx";
@@ -19,22 +21,24 @@ import ChangePasswordModal from "./components/ChangePasswordModal/ChangePassword
 
 function App() {
   const [user, setUser] = useState(null);
-  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [showChangePasswordModal, setShowChangePasswordModal] =
+    useState(false);
+
   const navigate = useNavigate();
 
-  // Load user from localStorage on app mount
+  // Load user from storage
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
 
-  // Login handler
+  // LOGIN
   const handleLogin = (data) => {
     const userData = { ...data.user, token: data.token };
+
     localStorage.setItem("user", JSON.stringify(userData));
     setUser(userData);
 
-    // Show change password modal if required
     if (userData.mustChangePassword) {
       setShowChangePasswordModal(true);
     } else {
@@ -42,7 +46,7 @@ function App() {
     }
   };
 
-  // Logout handler
+  // LOGOUT
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
@@ -52,11 +56,12 @@ function App() {
   return (
     <>
       <Routes>
-        {/* Public routes */}
+        {/* PUBLIC */}
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
         <Route path="/register" element={<Register />} />
-<Route path="/dashboard" element={<AnalyticsDashboard />} />
-        {/* Protected dashboards */}
+        <Route path="/dashboard" element={<AnalyticsDashboard />} />
+
+        {/* ADMIN */}
         <Route
           path="/dashboard/admin"
           element={
@@ -65,30 +70,63 @@ function App() {
             </ProtectedRoute>
           }
         />
-   <Route
-  path="/employees"
-  element={<EmployeesPage user={user} />}
-/>
-<Route
-  path="/products"
-  element={<ProductsPage user={user} />}
-/>
-<Route
-  path="/notifications"
-  element={
-    <ProtectedRoute user={user} allowedRoles={["ADMIN", "MANAGER", "INVENTORY"]}>
-      <NotificationsPage user={user} token={user?.token} />
-    </ProtectedRoute>
-  }
-/>
-<Route
-  path="/categories"
-  element={
-    <ProtectedRoute user={user} allowedRoles={["ADMIN", "MANAGER", "INVENTORY"]}>
-      <CategoriesPage token={user?.token} user={user} />
-    </ProtectedRoute>
-  }
-/>
+
+        {/* EMPLOYEES */}
+        <Route path="/employees" element={<EmployeesPage user={user} />} />
+
+        {/* PRODUCTS */}
+        <Route path="/products" element={<ProductsPage user={user} />} />
+
+        {/* NOTIFICATIONS */}
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute
+              user={user}
+              allowedRoles={["ADMIN", "MANAGER", "INVENTORY"]}
+            >
+              <NotificationsPage user={user} token={user?.token} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* CATEGORIES */}
+        <Route
+          path="/categories"
+          element={
+            <ProtectedRoute
+              user={user}
+              allowedRoles={["ADMIN", "MANAGER", "INVENTORY"]}
+            >
+              <CategoriesPage token={user?.token} user={user} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* SUPPLIERS */}
+        <Route
+          path="/suppliers"
+          element={
+            <ProtectedRoute
+              user={user}
+              allowedRoles={["ADMIN", "MANAGER", "INVENTORY"]}
+            >
+              <SuppliersPage token={user?.token} user={user} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* PURCHASE ORDERS */}
+        <Route
+          path="/purchase-orders"
+          element={
+            <ProtectedRoute user={user} allowedRoles={["ADMIN", "MANAGER", "INVENTORY"]}>
+              <PurchaseOrdersPage token={user?.token} user={user} />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* MANAGER */}
         <Route
           path="/dashboard/manager"
           element={
@@ -97,6 +135,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* CASHIER */}
         <Route
           path="/dashboard/cashier"
           element={
@@ -105,6 +145,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* INVENTORY */}
         <Route
           path="/dashboard/inventory"
           element={
@@ -113,6 +155,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* CUSTOMER */}
         <Route
           path="/dashboard/customer"
           element={
@@ -122,11 +166,11 @@ function App() {
           }
         />
 
-        {/* Default redirect */}
+        {/* DEFAULT */}
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
 
-      {/* Change Password Modal */}
+      {/* CHANGE PASSWORD MODAL */}
       {showChangePasswordModal && user && (
         <ChangePasswordModal
           token={user.token}

@@ -123,3 +123,12 @@ export const restoreProduct = async (id) => {
     [id]
   );
 };
+
+// Update stock when PO received
+export const updateStock = async (productId, quantity) => {
+  await pool.query(`
+    UPDATE products
+    SET stock_quantity = stock_quantity + ?
+    WHERE id = ?
+  `, [quantity, productId]);
+};

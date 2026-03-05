@@ -1,0 +1,150 @@
+.itemRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 16px;
+  align-items: end;
+  margin-bottom: 16px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  transition: box-shadow 0.2s ease;
+}
+
+.itemRow:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* FIELD WRAPPER */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #6b7280;
+  letter-spacing: 0.3px;
+}
+
+/* INPUTS + SELECTS */
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  font-size: 14px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* REMOVE BUTTON */
+
+.removeBtn {
+  height: 40px;
+  padding: 0 14px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.removeBtn:hover {
+  background: #dc2626;
+}
+
+.removeBtn:active {
+  transform: scale(0.96);
+}
+.actionButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.receiveBtn {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.receiveBtn:hover {
+  background: #15803d;
+}
+
+.cancelBtn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  background: #dc2626;
+}
+
+.reopenBtn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancelBadge {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+/* ===============================
+   TABLET RESPONSIVE
+================================ */
+
+@media (max-width: 900px) {
+  .itemRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .removeBtn {
+    width: 100%;
+  }
+}
+
+/* ===============================
+   MOBILE RESPONSIVE
+================================ */
+
+@media (max-width: 500px) {
+  .itemRow {
+    grid-template-columns: 1fr;
+  }
+
+  .removeBtn {
+    width: 100%;
+  }
+}

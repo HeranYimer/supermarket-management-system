@@ -248,6 +248,107 @@ export const deleteCategory = async (id, token) => {
   if (!res.ok) throw new Error("Failed to delete category");
   return res.json();
 };
+
+/* ================= SUPPLIERS ================= */
+
+export const getSuppliers = async (token) => {
+  const res = await fetch("http://localhost:5000/api/suppliers", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch suppliers");
+  return res.json();
+};
+
+export const createSupplier = async (supplier, token) => {
+  const res = await fetch("http://localhost:5000/api/suppliers", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(supplier),
+  });
+
+  if (!res.ok) throw new Error("Failed to create supplier");
+};
+
+export const updateSupplier = async (id, supplier, token) => {
+  const res = await fetch(
+    `http://localhost:5000/api/suppliers/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(supplier),
+    }
+  );
+
+  if (!res.ok) throw new Error("Failed to update supplier");
+};
+
+export const deleteSupplier = async (id, token) => {
+  const res = await fetch(
+    `http://localhost:5000/api/suppliers/${id}`,
+    {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+
+  if (!res.ok) throw new Error("Failed to delete supplier");
+};
+// ================= PURCHASE ORDERS =================
+export const getPurchaseOrders = async (token) => {
+  const res = await fetch(`${BASE_URL}/purchase-orders`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error("Failed to fetch purchase orders");
+  return res.json();
+};
+export const getPurchaseOrder = async (id, token) => {
+  const res = await fetch(`${BASE_URL}/purchase-orders/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error("Failed to fetch purchase order");
+  return res.json();
+};
+export const createPurchaseOrder = async (poData, token) => {
+  const res = await fetch(`${BASE_URL}/purchase-orders`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(poData),
+  });
+  if (!res.ok) throw new Error("Failed to create purchase order");
+  return res.json();
+};
+
+export const changePOStatus = async (id, status, token) => {
+  const res = await fetch(`${BASE_URL}/purchase-orders/${id}/status`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ status }),
+  });
+  if (!res.ok) throw new Error("Failed to change purchase order status");
+  return res.json();
+};
+export const updatePurchaseOrder = async (id, poData, token) => {
+  const res = await fetch(`${BASE_URL}/purchase-orders/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify(poData),
+  });
+  if (!res.ok) throw new Error("Failed to update purchase order");
+  return await res.json();
+};
 /* =====================================================
    SALES (Future)
 ===================================================== */

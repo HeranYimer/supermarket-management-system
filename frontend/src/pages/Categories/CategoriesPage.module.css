@@ -14,6 +14,18 @@
   flex: 1;
   width: 280px;
 }
+.addBtn,
+.createBtn,
+.cancelBtn,
+.editBtn,
+.deleteBtn,
+.updateBtn {
+  padding: 6px 12px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
 .addBtn{
 background-color: #2b9d2f;
 width: 150px;
@@ -26,18 +38,6 @@ width: 150px;
 }
 .editBtn:hover{
     background-color: #2980b9;
-}
-.addBtn,
-.createBtn,
-.cancelBtn,
-.editBtn,
-.deleteBtn,
-.updateBtn {
-  padding: 6px 12px;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
 }
 .updateBtn,.createBtn{
 background-color:  rgb(38, 144, 210);
